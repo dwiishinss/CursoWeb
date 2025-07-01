@@ -1,8 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-lancamento-grid',

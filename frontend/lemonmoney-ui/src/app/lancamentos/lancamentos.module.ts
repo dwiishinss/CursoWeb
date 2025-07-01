@@ -12,29 +12,27 @@ import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
-import { MessageModule } from 'primeng/message';
 import { FormsModule } from '@angular/forms';
-import { MessageComponent } from '../message/message.component';
+import { SharedModule } from "../shared/shared.module";
 
 
 
 @NgModule({
   declarations: [LancamentoCadastroComponent, LancamentosPesquisaComponent, LancamentoGridComponent],
   imports: [
-    InputTextModule, 
-    ButtonModule, 
+    InputTextModule,
+    ButtonModule,
     CommonModule,
-    TableModule, 
+    TableModule,
     TooltipModule,
-    InputTextareaModule, 
-    CalendarModule, 
+    InputTextareaModule,
+    CalendarModule,
     SelectButtonModule,
-    DropdownModule, 
-    CurrencyMaskModule, 
-    MessageModule, 
-    FormsModule, 
-    MessageComponent
-  ],
-  exports: [LancamentoCadastroComponent, LancamentosPesquisaComponent, LancamentoGridComponent]
+    DropdownModule,
+    CurrencyMaskModule,
+    FormsModule,
+    SharedModule
+],
+  exports: [LancamentoCadastroComponent, LancamentosPesquisaComponent]
 })
 export class LancamentosModule { }

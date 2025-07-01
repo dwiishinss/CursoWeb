@@ -5,8 +5,6 @@ import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-message',
-  standalone: true,
-  imports: [MessageModule, CommonModule],
   template: `
     <p-message *ngIf="temErro()" severity="error" text="{{text}}"></p-message>              
   `,

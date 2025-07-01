@@ -1,15 +1,7 @@
 import { Component } from '@angular/core';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
-import { CommonModule } from '@angular/common';
-
 @Component({
   selector: 'app-pessoas-pesquisa',
-  standalone: true,
-  imports: [InputTextModule, ButtonModule, TableModule, CommonModule, TooltipModule],
   templateUrl: './pessoas-pesquisa.component.html',
   styleUrl: './pessoas-pesquisa.component.css'
 })

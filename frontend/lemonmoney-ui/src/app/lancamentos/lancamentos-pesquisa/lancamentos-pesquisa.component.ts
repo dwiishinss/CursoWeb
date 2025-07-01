@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
-import { CommonModule } from '@angular/common';
-import { LancamentoGridComponent } from "../lancamento-grid/lancamento-grid.component";
-
 @Component({
   selector: 'app-lancamentos-pesquisa',
   templateUrl: './lancamentos-pesquisa.component.html',
