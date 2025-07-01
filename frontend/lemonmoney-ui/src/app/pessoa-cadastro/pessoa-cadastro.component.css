@@ -1,0 +1,13 @@
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.buttons button{
+  margin-right: 10px;
+}
+
+.buttons a{
+    text-decoration: none;
+    color: #337AB7;
+}

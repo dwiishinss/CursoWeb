@@ -1,0 +1,38 @@
+.col-valor {
+    width: 120px;
+    text-align: right;
+    color: black;
+}
+
+.col-data {
+    width: 120px;
+    text-align: center;
+    color: black;
+}
+
+.col-pessoa {
+    width: 550px;
+    text-align: left;
+    color: black;
+}
+
+.col-descricao {
+    width: 550px;
+    text-align: left;
+    color: black;
+}
+
+.col-button {
+    width: 100px;
+    text-align: center;
+    color: black;
+}   
+
+.ico {
+  font-size: 0.6rem;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  align-items: center;
+  justify-content: center;
+}

@@ -19,3 +19,28 @@ label{
         margin: 0 10px;
     }
 }
+
+.tabela-customizada table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tabela-customizada th,
+.tabela-customizada td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.tabela-customizada tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* efeito zebra */
+}
+
+.tabela-customizada tbody tr:hover {
+  background-color: #e0e0e0; /* efeito hover */
+}
+
+th {
+  background-color: #DEDEDE;
+  color: #333;
+  text-align: center;
+}

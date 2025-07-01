@@ -1,0 +1,29 @@
+.col-pessoa {
+    width: 365px;
+    text-align: left;
+    color: black;
+}
+
+.col-pessoa a{
+    text-decoration: none;
+    color: black;
+}
+
+.col-pessoa a:hover{
+    text-decoration: underline;
+    color: black;
+}
+
+.col-button {
+    width: 100px;
+    text-align: center;
+}   
+
+.ico {
+  font-size: 0.6rem;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  align-items: center;
+  justify-content: center;
+}

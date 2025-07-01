@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="grid">
+
+    <div class="col-12">
+      <h1>Lançamentos</h1>
+    </div>
+
+    <div class="col-12 p-fluid">
+      <label>Descrição</label>
+      <input pInputText type="text">
+    </div>
+
+    <div class="col-12">
+      <label style="display: block;">Vencimento</label>
+      <input pInputText type="text" style="width: 100px;">
+
+      <label> Até </label>
+      <input pInputText type="text" style="width: 100px;">
+    </div>
+
+    <div class="col-12">
+      <button pButton type="submit" label="Pesquisar"></button>
+    </div>
+  </div>
+
+  <div class="grid">
+      <div class="col-12">
+          <p-table 
+          [value]="lancamentos" 
+          [tableStyle]="{ 'min-width': '50rem' }"
+          [paginator]="true"
+          [rows]="8"
+          class="tabela-customizada">
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th>Pessoa</th>  
+                      <th>Descrição</th>
+                      <th>Vencimento</th>
+                      <th>Pagamento</th>
+                      <th>Valor</th>      
+                      <th></th>              
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-lancamento>
+                  <tr>
+                    <td class="col-pessoa">{{lancamento.pessoa}}</td>
+                    <td class="col-descricao">{{lancamento.descricao}}</td>
+                    <td class="col-data">{{lancamento.dataVencimento | date:'dd/MM/y'}}</td>
+                    <td class="col-data">{{lancamento.dataPagamento | date:'dd/MM/y'}}</td>
+                    <td class="col-valor"> <span [ngStyle]="{color: lancamento.tipo === 'DESPESA' ? 'red' : 'blue'}">
+                      {{lancamento.valor | currency:'BRL':'symbol':'1.2-2'}}
+                    </span></td>
+                    <td class="col-button">
+                      <a pButton class="ico" pTooltip="Editar" tooltipPosition="top">
+                        <i class="fa-solid fa-pencil"></i>
+                      </a>
+                      <button pButton class="ico" pTooltip="Excluir" tooltipPosition="top">
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+              </ng-template>
+          </p-table>
+      </div>
+      <div class="col-12">
+        <a pButton label="Novo Lançamento"></a>
+      </div>
+  </div>
+
+</div>
