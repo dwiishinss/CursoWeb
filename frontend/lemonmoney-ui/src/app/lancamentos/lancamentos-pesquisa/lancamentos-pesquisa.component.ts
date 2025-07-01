@@ -5,11 +5,10 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { CommonModule } from '@angular/common';
+import { LancamentoGridComponent } from "../lancamento-grid/lancamento-grid.component";
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
-  standalone: true,
-  imports: [InputTextModule, ButtonModule, TableModule, CommonModule, TooltipModule],
   templateUrl: './lancamentos-pesquisa.component.html',
   styleUrl: './lancamentos-pesquisa.component.css'
 })
