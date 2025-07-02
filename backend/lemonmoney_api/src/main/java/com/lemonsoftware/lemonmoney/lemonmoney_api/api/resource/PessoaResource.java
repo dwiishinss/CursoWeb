@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.event.RecursoCriadoEvent;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.model.Pessoa;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.repository.PessoaRepository;
+import com.lemonsoftware.lemonmoney.lemonmoney_api.api.repository.filter.PessoaFilter;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.service.PessoaService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,8 +47,14 @@ public class PessoaResource {
 
     @GetMapping("")
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')")
-    public List<Pessoa> listaPessoas() {
-        return pessoaRepository.findAll();
+    public Page<Pessoa> listaPessoas(PessoaFilter pessoaFilter, Pageable page) {
+        return pessoaRepository.filtrar(pessoaFilter, page);
+    }
+
+    @GetMapping("/ativo")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')")
+    public List<Pessoa> listaPessoasAtivas() {
+        return pessoaRepository.buscaAtivos();
     }
 
     @GetMapping("/{id}")

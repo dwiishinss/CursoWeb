@@ -1,31 +1,35 @@
 <div class="container">
   <div class="grid">
 
-    <div class="col-12">
-      <h1>Lançamentos</h1>
-    </div>
+    <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-    <div class="col-12 p-fluid">
-      <label>Descrição</label>
-      <input pInputText type="text">
-    </div>
+      <div class="col-12">
+        <h1>Lançamentos</h1>
+      </div>
 
-    <div class="col-12">
-      <label style="display: block;">Vencimento</label>
-      <input pInputText type="text" style="width: 100px;">
+      <div class="col-12 p-fluid">
+        <label>Descrição</label>
+        <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
+      </div>
 
-      <label> Até </label>
-      <input pInputText type="text" style="width: 100px;">
-    </div>
+      <div class="col-12">
+        <label style="display: block;">Vencimento</label>
+        <p-calendar [inputStyle]="{width: '110px'}" dateFormat="dd/mm/yy" readonlyInput="true" name="vencimentoInicio" [(ngModel)]="filtro.dataVencimentoInicio" required></p-calendar>
 
-    <div class="col-12">
-      <button pButton type="submit" label="Pesquisar"></button>
-    </div>
+        <label> Até </label>
+        <p-calendar [inputStyle]="{width: '110px'}" dateFormat="dd/mm/yy" readonlyInput="true" name="vencimentoFim" [(ngModel)]="filtro.dataVencimentoFim" required></p-calendar>
+      </div>
+
+      <div class="col-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+
+    </form>
   </div>
 
   <div class="grid">
     <div class="col-12">
-      <app-lancamento-grid [lancamentos]="lancamentos"></app-lancamento-grid>
+      <app-lancamento-grid [lancamentos]="lancamentos" [filtro]="filtro" [totalRegistros]="totalRegistros" [pesquisar]="pesquisar.bind(this)"></app-lancamento-grid>
     </div>
   </div> 
   <div class="col-12">

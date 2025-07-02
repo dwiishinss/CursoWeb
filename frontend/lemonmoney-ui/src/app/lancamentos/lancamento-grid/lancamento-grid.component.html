@@ -3,7 +3,10 @@
 [value]="lancamentos" 
 [tableStyle]="{ 'min-width': '50rem' }"
 [paginator]="true"
-[rows]="8"
+[rows]="filtro.itensPorPagina"
+[lazy]="true"
+[totalRecords]="totalRegistros"
+(onLazyLoad)="aoMudarPagina($event)"
 class="tabela-customizada">
     <ng-template pTemplate="header">
         <tr>

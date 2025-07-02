@@ -6,7 +6,7 @@
                 <h1>Novo Lançamento</h1>
             </div>
             <div class="col-12">
-                <p-selectButton [options]="tipos" #tipo></p-selectButton>
+                <p-selectButton [options]="tipos" [(ngModel)] ="tipoSelecionado" name="tipo" ngModel #tipo="ngModel"></p-selectButton>
             </div>
             <div class="col-6 md:col-3 p-fluid">
                 <label>Vencimento</label>
@@ -15,7 +15,7 @@
             </div>
             <div class="col-6 md:col-3   p-fluid">
                 <label>{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
-                <p-calendar dateFormat="dd/mm/yy" readonlyInput="true"></p-calendar>
+                <p-calendar dateFormat="dd/mm/yy" readonlyInput="true" name="pagamento" ngModel #pagamento="ngModel"></p-calendar>
             </div>
             <div class="col-12 md:col-9 p-fluid">
                 <label>Descrição</label>
@@ -38,15 +38,15 @@
             <div class="col-12 md:col-6 p-fluid">
                 <label>Pessoa</label>
                 <p-dropdown [options]="pessoas" placeholder="Selecione" [filter]="true" name="pessoa" ngModel #pessoa="ngModel" required></p-dropdown>
-                <app-message [control]="categoria" error="required" text="Informe uma pessoa"></app-message>
+                <app-message [control]="pessoa" error="required" text="Informe uma pessoa"></app-message>
             </div>
             <div class="col-12 p-fluid">
                 <label>Observação</label>
-                <textarea pInputTextarea rows="3"></textarea>
+                <textarea pInputTextarea rows="3" name="observacao" ngModel #observacao="ngModel"></textarea>
             </div>
             <div class="col-12 buttons">
                 <button pButton type="submit" label="Salvar" class="button"
-                [disabled]="!lancamentoForm.valid"></button>
+                [disabled]="!lancamentoForm.valid" (click)="adicionar(lancamentoForm.value, lancamentoForm.value.vencimento, lancamentoForm.value.pagamento)"></button>
                 <button pButton type="button" label="Novo" severity="info" class="button"></button>
                 <a href="javascript:;">Voltar para a pesquisa</a>
             </div>

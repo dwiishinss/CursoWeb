@@ -14,6 +14,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from "../shared/shared.module";
+import { LancamentosService } from '../services/lancamentos.service';
+import { HttpClientModule } from '@angular/common/http';
+import { PessoasService } from '../services/pessoas.service';
 
 
 
@@ -33,6 +36,7 @@ import { SharedModule } from "../shared/shared.module";
     FormsModule,
     SharedModule
 ],
-  exports: [LancamentoCadastroComponent, LancamentosPesquisaComponent]
+  exports: [LancamentoCadastroComponent, LancamentosPesquisaComponent, HttpClientModule],
+  providers: [LancamentosService, PessoasService]
 })
 export class LancamentosModule { }
