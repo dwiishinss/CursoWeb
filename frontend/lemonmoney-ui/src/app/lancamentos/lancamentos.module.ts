@@ -34,9 +34,9 @@ import { PessoasService } from '../services/pessoas.service';
     DropdownModule,
     CurrencyMaskModule,
     FormsModule,
-    SharedModule
+    SharedModule,
 ],
   exports: [LancamentoCadastroComponent, LancamentosPesquisaComponent, HttpClientModule],
-  providers: [LancamentosService, PessoasService]
+  providers: []
 })
 export class LancamentosModule { }

@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { Pessoa } from '../../model/Pessoa';
+import { PessoaFiltro, PessoasService } from '../../services/pessoas.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -6,12 +12,52 @@ import { Component } from '@angular/core';
   styleUrl: './pessoas-pesquisa.component.css'
 })
 export class PessoasPesquisaComponent {
-  pessoas = [
-    { nome: 'Manoel Pinheiro', cidade: 'Uberlândia', estado: 'MG', ativo: true },
-    { nome: 'Sebastião da Silva', cidade: 'São Paulo', estado: 'SP', ativo: false },
-    { nome: 'Carla Souza', cidade: 'Florianópolis', estado: 'SC', ativo: true },
-    { nome: 'Luís Pereira', cidade: 'Curitiba', estado: 'PR', ativo: true },
-    { nome: 'Vilmar Andrade', cidade: 'Rio de Janeiro', estado: 'RJ', ativo: false },
-    { nome: 'Paula Maria', cidade: 'Uberlândia', estado: 'MG', ativo: true }
-  ];
+  
+  pessoas: Pessoa[]= [];
+  filtro = new PessoaFiltro();
+  totalRegistros = 0;
+    
+  constructor(
+    private pessoaService: PessoasService,
+    private confirmation: ConfirmationService,
+    private toasty: ToastrService,
+    private errorHandle: ErrorHandlerService
+  ){ }
+
+  pesquisar(pagina = 0){
+    this.filtro.pagina = pagina
+    this.pessoaService.consultar(this.filtro).then(
+      dados => {
+        this.pessoas = dados.pessoas;
+        this.totalRegistros = dados.total;
+      }
+    )
+  }
+
+  atualizarAtividade(pessoa: any, grid: any){
+    this.pessoaService.modificarAtividade(pessoa).then(() => {
+      this.pesquisar(grid.first)
+    })
+  }
+
+  confirmarExclusao(pessoa: any, grid:any){
+    this.confirmation.confirm({
+      message: "Tem certeza que deseja excluir",
+      accept: () => {
+        this.excluir(pessoa, grid);
+      }
+    })
+  }
+
+  excluir(pessoa: any, grid: any){
+    this.pessoaService.excluir(pessoa.id).then(() => {
+      grid.first = 0;
+      this.pesquisar();
+
+      this.toasty.success(
+        'Lançamento excluído com sucesso!'
+      )
+    }).catch(erro => this.errorHandle.handle(erro))
+  }
+
 }

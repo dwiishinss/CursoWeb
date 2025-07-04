@@ -29,7 +29,7 @@
 
   <div class="grid">
     <div class="col-12">
-      <app-lancamento-grid [lancamentos]="lancamentos" [filtro]="filtro" [totalRegistros]="totalRegistros" [pesquisar]="pesquisar.bind(this)"></app-lancamento-grid>
+      <app-lancamento-grid [lancamentos]="lancamentos" [filtro]="filtro" [totalRegistros]="totalRegistros" [pesquisar]="pesquisar.bind(this)" [excluir]="confirmarExclusao.bind(this)"></app-lancamento-grid>
     </div>
   </div> 
   <div class="col-12">

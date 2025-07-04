@@ -1,5 +1,13 @@
 <app-navbar></app-navbar>
-<app-lancamento-cadastro></app-lancamento-cadastro>
-<!-- <app-pessoas-pesquisa></app-pessoas-pesquisa> -->
+<app-pessoas-pesquisa></app-pessoas-pesquisa>
 <app-lancamentos-pesquisa></app-lancamentos-pesquisa>
-<!-- <app-pessoa-cadastro></app-pessoa-cadastro> -->
+<app-pessoa-cadastro></app-pessoa-cadastro>
+<app-lancamento-cadastro></app-lancamento-cadastro>
+
+
+<p-confirmDialog header="Confirmação" icon="fa-solid fa-question-circle" #confirmacao>
+    <p-footer>
+        <p-button type="button" pButton icon="fa-check fa-solid" label="Sim" (click)="confirmacao.accept()"></p-button>
+        <p-button type="button" pButton icon="fa-times fa-solid" label="Não" (click)="confirmacao.reject()"></p-button>
+    </p-footer>
+</p-confirmDialog>

@@ -2,8 +2,12 @@
 [value]="pessoas" 
 [tableStyle]="{ 'min-width': '50rem' }"
 [paginator]="true"
-[rows]="8"
-class="tabela-customizada">
+[rows]="filtro.itensPorPagina"
+[lazy]="true"
+[totalRecords]="totalRegistros"
+(onLazyLoad)="aoMudarPagina($event)"
+class="tabela-customizada"
+#tabela>
     <ng-template pTemplate="header">
         <tr>
             <th>Nome</th>  
@@ -16,16 +20,16 @@ class="tabela-customizada">
     <ng-template pTemplate="body" let-pessoa>
         <tr>
         <td class="col-pessoa">{{pessoa.nome}}</td>
-        <td class="col-pessoa">{{pessoa.cidade}}</td>
-        <td class="col-pessoa">{{pessoa.estado}}</td>
-        <td class="col-pessoa"><a href="javascript:;" pTooltip="{{pessoa.ativo?'Desativar':'Ativar'}}" tooltipPosition="top">
+        <td class="col-pessoa">{{pessoa.endereco.cidade}}</td>
+        <td class="col-pessoa">{{pessoa.endereco.estado}}</td>
+        <td class="col-pessoa"><a href="javascript:;" pTooltip="{{pessoa.ativo?'Desativar':'Ativar'}}" tooltipPosition="top" (click)="atualizarAtividade(pessoa, tabela)">
             {{pessoa.ativo===true?"Ativo":"Inativo"}}
         </a></td>
         <td class="col-button">
             <a pButton class="ico" pTooltip="Editar" tooltipPosition="top">
             <i class="fa-solid fa-pencil"></i>
             </a>
-            <button pButton class="ico" pTooltip="Excluir" tooltipPosition="top">
+            <button pButton class="ico" pTooltip="Excluir" tooltipPosition="top" (click)="aoExcluirPessoa(pessoa)">
             <i class="fa-solid fa-trash"></i>
             </button>
         </td>

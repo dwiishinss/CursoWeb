@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { LancamentosModule } from './lancamentos/lancamentos.module';
-import { PessoasModule } from './pessoas/pessoas.module';
-import { CoreModule } from './core/core.module';
+import { ToastrConfig } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [LancamentosModule, PessoasModule, CoreModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
-  
+
 }

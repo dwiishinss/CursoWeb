@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { firstValueFrom } from 'rxjs';
 import { Pessoa } from "../model/Pessoa";
+import { response } from "express";
 
 export class PessoaFiltro {
   nome?: string;
@@ -13,13 +14,14 @@ export class PessoaFiltro {
 export class PessoasService { 
 
     pessoas: Pessoa[] = [];
+    pessoasUrl = 'http://localhost:8080/pessoas'
 
     constructor(private http: HttpClient){ }
 
     async consultar(filter: PessoaFiltro) {
         let params = new HttpParams();
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE0ODk1MzAsImV4cCI6MTc1MTQ5MTMzMH0.5cOrJKmgbmot-j6hkGI9TKaTPYbRg4bA3ZR5m1Z1nUc',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
         'Content-Type': 'application/json'
         });
 
@@ -30,11 +32,12 @@ export class PessoasService {
           params = params.set('nome', filter.nome);
         }
 
-        return await firstValueFrom(this.http.get<PessoaResponse>("http://localhost:8080/pessoas", {headers, params})).then(
+        return await firstValueFrom(this.http.get<PessoaResponse>(this.pessoasUrl, {headers, params})).then(
             response => { 
-              const lancamentos = response.content
+              const pessoas = response.content
+              console.log(pessoas)
               const resultado = {
-                lancamentos,
+                pessoas,
                 total: response.totalElements
               }
               return resultado
@@ -44,22 +47,42 @@ export class PessoasService {
 
     async consultarAtivo() {
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE0ODk1MzAsImV4cCI6MTc1MTQ5MTMzMH0.5cOrJKmgbmot-j6hkGI9TKaTPYbRg4bA3ZR5m1Z1nUc',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
         'Content-Type': 'application/json'
         });
 
-        return await firstValueFrom(this.http.get<Pessoa[]>("http://localhost:8080/pessoas/ativo", {headers})).then(
+        return await firstValueFrom(this.http.get<Pessoa[]>(`${this.pessoasUrl}/ativo`, {headers})).then(
             response => { return response } 
         );
     }
 
+    modificarAtividade(pessoa: Pessoa) {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Content-Type': 'application/json'
+      });
+
+      return firstValueFrom(this.http.put(`${this.pessoasUrl}/${pessoa.id}/ativo`, !pessoa.ativo, {headers})).then(
+        response => { return response }
+      )
+    }
+
     async adicionar(pessoa : Pessoa){
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE0ODk1MzAsImV4cCI6MTc1MTQ5MTMzMH0.5cOrJKmgbmot-j6hkGI9TKaTPYbRg4bA3ZR5m1Z1nUc',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
         'Content-Type': 'application/json'
         });
         console.log(pessoa)
-        await firstValueFrom(this.http.post("http://localhost:8080/lancamentos", pessoa ,{headers}));
+        await firstValueFrom(this.http.post(this.pessoasUrl, pessoa ,{headers}));
+    }
+
+    excluir(codigo: number) {
+        const headers = new HttpHeaders({
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Content-Type': 'application/json'
+        });
+        
+        return firstValueFrom(this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })).then(() => null)
     }
 
 }

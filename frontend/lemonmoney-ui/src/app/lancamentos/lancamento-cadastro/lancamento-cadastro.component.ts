@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LancamentosService } from '../../services/lancamentos.service';
-import { Categoria, Lancamento } from '../../model/lancamento';
+import { Categoria, Lancamento } from '../../model/Lancamento';
 import { Pessoa } from '../../model/Pessoa';
 import { PessoasService } from '../../services/pessoas.service';
+import { CategoriasService } from '../../services/categorias.service';
+import { ErrorHandlerService } from '../../core/error-handler.service';
 
 
 @Component({
@@ -14,7 +16,10 @@ export class LancamentoCadastroComponent implements OnInit{
 
   tipoSelecionado = "RECEITA";
 
-  constructor(private lancamentoService: LancamentosService, private pessoasService: PessoasService){ }
+  constructor(private lancamentoService: LancamentosService, 
+    private pessoasService: PessoasService,
+    private categoriasSevice: CategoriasService,
+    private errorHandle: ErrorHandlerService){ }
 
   adicionar(lancamento: Lancamento, vencimento: Date, pagamento: Date){
 
@@ -41,14 +46,14 @@ export class LancamentoCadastroComponent implements OnInit{
           label: p.nome,
           value: { id: p.id }
         }));
-        })
-    this.lancamentoService.consultarCategoria().then(
+        }).catch(erro => this.errorHandle.handle(erro))
+    this.categoriasSevice.consultarCategoria().then(
       dados => {
         this.categorias = dados.map((p: any) => ({
           label: p.nome,
           value: { id: p.id }
         }));
-      })
+      }).catch(erro => this.errorHandle.handle(erro))
   }
   pessoas = [
     {label:"Igor", value: {id: 1}},
