@@ -25,7 +25,7 @@ export class LancamentosService {
     consultar(filter: LancamentoFiltro) {
         let params = new HttpParams();
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
         'Content-Type': 'application/json'
         });
 
@@ -54,18 +54,38 @@ export class LancamentosService {
         );
     }
 
-    adicionar(lancamento : Lancamento){
+    consultarId(id: number) {
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
         'Content-Type': 'application/json'
         });
-        console.log(lancamento)
-        firstValueFrom(this.http.post(`${this.lancamentosUrl}`, lancamento ,{headers}));
+
+        return firstValueFrom(this.http.get(`${this.lancamentosUrl}/${id}`, { headers })).then(
+            response => { 
+              return response
+            } 
+        );
+    }
+
+    editar(lancamento : Lancamento){
+        const headers = new HttpHeaders({
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
+        'Content-Type': 'application/json'
+        });
+        return firstValueFrom(this.http.put(`${this.lancamentosUrl}/${lancamento.id}`, lancamento ,{headers}));
+    }
+
+    adicionar(lancamento : Lancamento){
+        const headers = new HttpHeaders({
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
+        'Content-Type': 'application/json'
+        });
+        return firstValueFrom(this.http.post(`${this.lancamentosUrl}`, lancamento ,{headers}));
     }
 
     excluir(codigo: number) {
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
         'Content-Type': 'application/json'
         });
         

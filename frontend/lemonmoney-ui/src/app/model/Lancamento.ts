@@ -7,7 +7,7 @@ export class Lancamento {
     dataVencimento?: string | null;     
     dataPagamento?: string | null; 
     valor?: number;              
-    tipo?: 'RECEITA' | 'DESPESA';
+    tipo?: 'RECEITA' | 'DESPESA' = 'RECEITA';
     observacao?: string | null;
     categoria?: Categoria;         
     pessoa?: Pessoa; 

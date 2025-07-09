@@ -15,6 +15,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { TableModule } from 'primeng/table';
 import { PessoasGridComponent } from './pessoas-grid/pessoas-grid.component';
 import { SharedModule } from "../shared/shared.module";
+import { RouterModule } from '@angular/router';
+import { PessoasRoutingModule } from './pessoas-routing.module';
 
 
 
@@ -33,11 +35,9 @@ import { SharedModule } from "../shared/shared.module";
     FormsModule,
     TooltipModule,
     TableModule,
-    SharedModule
+    SharedModule,
+    PessoasRoutingModule
 ],
-  exports: [
-    PessoaCadastroComponent,
-    PessoasPesquisaComponent
-  ]
+  exports: []
 })
 export class PessoasModule { }

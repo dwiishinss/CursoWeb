@@ -21,7 +21,7 @@ export class PessoasService {
     async consultar(filter: PessoaFiltro) {
         let params = new HttpParams();
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
         'Content-Type': 'application/json'
         });
 
@@ -45,20 +45,41 @@ export class PessoasService {
         );
     }
 
-    async consultarAtivo() {
+    consultarAtivo() {
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
         'Content-Type': 'application/json'
         });
 
-        return await firstValueFrom(this.http.get<Pessoa[]>(`${this.pessoasUrl}/ativo`, {headers})).then(
+        return firstValueFrom(this.http.get<Pessoa[]>(`${this.pessoasUrl}/ativo`, {headers})).then(
             response => { return response } 
         );
     }
 
+    consultarId(id: number) {
+        const headers = new HttpHeaders({
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
+        'Content-Type': 'application/json'
+        });
+
+        return firstValueFrom(this.http.get(`${this.pessoasUrl}/${id}`, { headers })).then(
+            response => { 
+              return response
+            } 
+        );
+    }
+
+    editar(pessoa : Pessoa){
+        const headers = new HttpHeaders({
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
+        'Content-Type': 'application/json'
+        });
+        return firstValueFrom(this.http.put(`${this.pessoasUrl}/${pessoa.id}`, pessoa ,{headers}));
+    }
+
     modificarAtividade(pessoa: Pessoa) {
       const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
         'Content-Type': 'application/json'
       });
 
@@ -67,18 +88,18 @@ export class PessoasService {
       )
     }
 
-    async adicionar(pessoa : Pessoa){
+    adicionar(pessoa : Pessoa){
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
         'Content-Type': 'application/json'
         });
         console.log(pessoa)
-        await firstValueFrom(this.http.post(this.pessoasUrl, pessoa ,{headers}));
+        return firstValueFrom(this.http.post(this.pessoasUrl, pessoa ,{headers}));
     }
 
     excluir(codigo: number) {
         const headers = new HttpHeaders({
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTE2NTYzMzAsImV4cCI6MTc1MTY1ODEzMH0.2F0-xWJcmHKYMak5f5oGe6B5KNzIUyqPVv7vKw5javQ',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBsZW1vbi5jb20iLCJpYXQiOjE3NTIwNzM1OTAsImV4cCI6MTc1MjA3NTM5MH0.-sZrmcNxATNor7ozJij_nIlthUYxjS-Pq4g9Srjjorc',
         'Content-Type': 'application/json'
         });
         

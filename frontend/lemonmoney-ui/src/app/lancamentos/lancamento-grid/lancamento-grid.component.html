@@ -29,7 +29,7 @@ class="tabela-customizada"
             {{lancamento.valor | currency:'BRL':'symbol':'1.2-2'}}
         </span></td>
         <td class="col-button">
-            <a pButton class="ico" pTooltip="Editar" tooltipPosition="top">
+            <a pButton class="ico" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/lancamentos', lancamento.id]">
             <i class="fa-solid fa-pencil"></i>
             </a>
             <button pButton class="ico" pTooltip="Excluir" tooltipPosition="top" (click)="aoExcluirLancamento(lancamento)">

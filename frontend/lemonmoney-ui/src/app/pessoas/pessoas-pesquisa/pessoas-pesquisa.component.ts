@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pessoa } from '../../model/Pessoa';
 import { PessoaFiltro, PessoasService } from '../../services/pessoas.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorHandlerService } from '../../core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
   templateUrl: './pessoas-pesquisa.component.html',
   styleUrl: './pessoas-pesquisa.component.css'
 })
-export class PessoasPesquisaComponent {
+export class PessoasPesquisaComponent implements OnInit{
   
   pessoas: Pessoa[]= [];
   filtro = new PessoaFiltro();
@@ -21,8 +22,14 @@ export class PessoasPesquisaComponent {
     private pessoaService: PessoasService,
     private confirmation: ConfirmationService,
     private toasty: ToastrService,
-    private errorHandle: ErrorHandlerService
+    private errorHandle: ErrorHandlerService,
+    private title: Title
   ){ }
+
+
+  ngOnInit(): void {
+    this.title.setTitle('Pesquisa pessoas')
+  }
 
   pesquisar(pagina = 0){
     this.filtro.pagina = pagina

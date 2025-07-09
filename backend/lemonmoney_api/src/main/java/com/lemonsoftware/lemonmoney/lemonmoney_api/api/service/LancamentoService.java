@@ -2,6 +2,7 @@ package com.lemonsoftware.lemonmoney.lemonmoney_api.api.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,21 @@ public class LancamentoService {
         }
 
         return lancamentoRepository.save(lancamento);
+    }
 
+    public Lancamento atualizarLancamento(Long id, Lancamento lancamento){
+        Lancamento lancamentoSalvo = buscarLancamentoById(id);
+        BeanUtils.copyProperties(lancamento, lancamentoSalvo, "id");
+
+        return lancamentoRepository.save(lancamentoSalvo);
+    }
+
+    public Lancamento buscarLancamentoById(Long id){
+        Optional<Lancamento> lancamentoOptional = lancamentoRepository.findById(id);
+        if(!lancamentoRepository.existsById(id)){
+            throw new EmptyResultDataAccessException(1);
+        }
+        return lancamentoOptional.get();
     }
 
     public void deletarLancamento(Long id){

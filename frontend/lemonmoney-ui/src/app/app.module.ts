@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { CoreModule } from './core/core.module';
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,11 +20,14 @@ import { NgModule } from '@angular/core';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
     FormsModule,
     LancamentosModule, 
     PessoasModule, 
     CoreModule,
     SharedModule,
+
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

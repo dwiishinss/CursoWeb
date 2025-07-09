@@ -14,9 +14,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from "../shared/shared.module";
-import { LancamentosService } from '../services/lancamentos.service';
-import { HttpClientModule } from '@angular/common/http';
-import { PessoasService } from '../services/pessoas.service';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
 
 
@@ -24,8 +23,10 @@ import { PessoasService } from '../services/pessoas.service';
   declarations: [LancamentoCadastroComponent, LancamentosPesquisaComponent, LancamentoGridComponent],
   imports: [
     InputTextModule,
+    InputNumberModule,
     ButtonModule,
     CommonModule,
+
     TableModule,
     TooltipModule,
     InputTextareaModule,
@@ -35,8 +36,10 @@ import { PessoasService } from '../services/pessoas.service';
     CurrencyMaskModule,
     FormsModule,
     SharedModule,
+
+    LancamentosRoutingModule
 ],
-  exports: [LancamentoCadastroComponent, LancamentosPesquisaComponent, HttpClientModule],
+  exports: [],
   providers: []
 })
 export class LancamentosModule { }

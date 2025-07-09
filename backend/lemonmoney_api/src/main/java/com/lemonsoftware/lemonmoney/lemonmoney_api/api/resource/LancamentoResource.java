@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.event.RecursoCriadoEvent;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.exceptionHandler.lemonmoneyExceptionHandler.Erro;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.model.Lancamento;
+import com.lemonsoftware.lemonmoney.lemonmoney_api.api.model.Pessoa;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.repository.LancamentoRepository;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.repository.filter.LancamentoFilter;
 import com.lemonsoftware.lemonmoney.lemonmoney_api.api.repository.projection.ResumoLancamento;
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -93,6 +95,13 @@ public class LancamentoResource {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletaLancamento(@PathVariable Long id){
         lancamentoService.deletarLancamento(id);
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')")
+    public ResponseEntity<Lancamento> atualizarLancamento(@PathVariable Long id, @Valid @RequestBody Lancamento lancamento) {
+        Lancamento lancamentoSalvo = lancamentoService.atualizarLancamento(id, lancamento);
+        return ResponseEntity.ok(lancamentoSalvo);
     }
 
     @ExceptionHandler({PessoaInativaOuInexistenteException.class})
